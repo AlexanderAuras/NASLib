@@ -3,6 +3,9 @@ search_space="$1"
 dataset="$2"
 echo dataset = $dataset
 echo search_space = $search_space
+
+
+# TNB101
 tnb_datasets=(benevolence forkland merom)
 if [ "$search_space" = "tnb101" ] || [ "$search_space" = "all" ]
 then
@@ -14,7 +17,7 @@ then
         file=$dataset_base\_rgb.tar
         filepath=http://downloads.cs.stanford.edu/downloads/taskonomy_data/rgb/$file
         echo $filepath
-	cd $dataset_base
+	     cd $dataset_base
         if [ -d "rgb" ]
         then
            echo rgb exists
@@ -28,7 +31,7 @@ then
       done
    fi
    if [ "$dataset" = "class_scene" ] || [ "$search_space" = "all" ] || [ "$dataset" = "all" ]
-   then 
+   then
       for dataset_base in ${tnb_datasets[@]}
       do
        file=$dataset_base\_class_scene.tar
@@ -57,6 +60,67 @@ then
        done
        done
    fi
+   if [ "$dataset" = "normal" ] || [ "$search_space" = "all" ] || [ "$dataset" = "all" ]
+   then
+      for dataset_base in ${tnb_datasets[@]}
+      do
+       file=$dataset_base\_normal.tar
+       filepath=http://downloads.cs.stanford.edu/downloads/taskonomy_data/normal/$file
+       echo $filepath
+       cd $dataset_base
+       if [ -d "normal" ]
+       then
+          echo normal exists
+       else
+          echo normal does not exist
+         #  wget $filepath
+          tar -xvf $file
+          rm $file
+       fi
+       cd ..
+      done
+   fi
+   if [ "$dataset" = "room_layout" ] || [ "$search_space" = "all" ] || [ "$dataset" = "all" ]
+   then
+      for dataset_base in ${tnb_datasets[@]}
+      do
+       file=$dataset_base\_point_info.tar
+       filepath=http://downloads.cs.stanford.edu/downloads/taskonomy_data/point_info/$file
+       echo $filepath
+       cd $dataset_base
+       if [ -d "room_layout" ]
+       then
+          echo room_layout exists
+       else
+          echo room_layout does not exist
+          wget $filepath
+          tar -xvf $file
+          rm $file
+       fi
+       cd ..
+      done
+   fi
+   if [ "$dataset" = "segmentsemantic" ] || [ "$search_space" = "all" ] || [ "$dataset" = "all" ]
+   then
+      for dataset_base in ${tnb_datasets[@]}
+      do
+       file=$dataset_base\_segment_semantic.tar
+       filepath=http://downloads.cs.stanford.edu/downloads/taskonomy_data/segment_semantic/$file
+       echo $filepath
+       cd $dataset_base
+       if [ -d "segmentsemantic" ]
+       then
+          echo segmentsemantic exists
+       else
+          echo segmentsemantic does not exist
+          wget $filepath
+          tar -xvf $file
+          rm $file
+          mv segment_semantic segmentsemantic
+       fi
+       cd ..
+      done
+   fi
    if [ "$dataset" = "class_object" ] || [ "$search_space" = "all" ] || [ "$dataset" = "all" ]
    then
       for dataset_base in ${tnb_datasets[@]}
@@ -79,6 +143,9 @@ then
    fi
    cd ..
 fi
+
+
+# NB301
 if [ "$search_space" = "nb301" ] || [ "$search_space" = "all" ]
 then
   if [ -e nb_models ]
@@ -96,6 +163,9 @@ then
     gdown 1YJ80Twt9g8Gaf8mMgzK-f5hWaVFPlECF
   fi
 fi
+
+
+# NB201
 if [ "$search_space" = "nb201" ] || [ "$search_space" = "all" ]
 then
   if [ "$dataset" = "cifar10" ] || [ "$search_space" = "all" ] || [ "$dataset" = "all" ]
