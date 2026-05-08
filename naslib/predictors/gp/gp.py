@@ -8,7 +8,7 @@ import os
 import json
 
 from naslib.utils.encodings import EncodingType
-from naslib.predictors.gp import BaseGPModel
+from naslib.predictors.gp.gp_base import BaseGPModel
 
 
 class GPPredictor(BaseGPModel):
