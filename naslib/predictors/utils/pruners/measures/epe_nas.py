@@ -47,6 +47,7 @@ def eval_score_perclass(jacob, labels=None, n_classes=10):
 
     per_class={}
     for i, label in enumerate(labels[0]):
+        label = 0
         if label in per_class:
             per_class[label] = np.vstack((per_class[label],jacob[i]))
         else:
